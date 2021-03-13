@@ -1,0 +1,63 @@
+{
+  "name": "wot-monitor",
+  "version": "0.1.0",
+  "description": "World of Tanks monitor app",
+  "author": "WahaWaher",
+  "homepage": "./",
+  "private": true,
+  "main": "app/index.js",
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^7.0.2"
+  },
+  "scripts": {
+    "react-dev": "react-app-rewired start",
+    "react-build": "react-app-rewired build",
+    "react-eject": "react-app-rewired eject",
+    "electron-dev": "electron-forge start",
+    "electron-pack": "electron-forge package",
+    "electron-make": "electron-forge make",
+    "dev": "concurrently -k \"yarn react-dev\" \"wait-on tcp:3000 && yarn electron-dev\"",
+    "build": "yarn react-build && yarn electron-pack",
+    "rdev": "yarn react-dev",
+    "edev": "wait-on tcp:3000 && yarn electron-dev",
+    "epack": "yarn electron-pack"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "last 1 chrome version"
+    ],
+    "development": [
+      "last 1 chrome version"
+    ]
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "concurrently": "^6.0.0",
+    "electron": "^12.0.1",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-reload": "^1.5.0",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-app-rewire-aliases": "^0.2.0",
+    "react-app-rewire-unplug": "^0.9.0",
+    "react-app-rewired": "^2.1.8",
+    "react-devtools-electron": "^4.7.0",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.3",
+    "wait-on": "^5.2.1"
+  },
+  "config": {
+    "forge": "./forge.config.js"
+  }
+}
