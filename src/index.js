@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
+import App from '@/components/App';
+import { AppStore } from '@/store';
+import { AppRouter } from '@/router';
+import { AppTheme } from '@/theme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppStore>
+      <AppRouter>
+        <AppTheme>
+          <App />
+        </AppTheme>
+      </AppRouter>
+    </AppStore>
   </React.StrictMode>,
   document.getElementById('root')
 );

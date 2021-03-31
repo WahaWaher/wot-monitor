@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+  outline: none;
+  // &:first-child {
+  //   margin-top: 0 !important;
+  // }
+  // &:last-child {
+  //   margin-bottom: 0 !important;
+  // }
+}

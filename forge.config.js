@@ -1,4 +1,3 @@
-
 module.exports = {
   packagerConfig: {
     name: 'WOTMonitor',
@@ -7,6 +6,7 @@ module.exports = {
     platform: 'win32',
     arch: 'x64',
     // asar: true,
+    icon: './app/assets/icons/favicon.ico',
     ignore: [
       'src',
       'public',
