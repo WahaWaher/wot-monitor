@@ -4,13 +4,7 @@ const { getConfig } = require('./build-config');
 const buildRelease = async () => {
   await electronBuilder.build({
     x64: true,
-    publish: [
-      {
-        provider: 'github',
-        owner: 'WahaWaher',
-        repo: 'wot-monitor',
-      },
-    ],
+    publish: 'always',
     config: getConfig(
       {},
       {
@@ -22,7 +16,7 @@ const buildRelease = async () => {
 
   await electronBuilder.build({
     ia32: true,
-    publish: 'never',
+    publish: 'always',
     config: getConfig(
       {},
       {

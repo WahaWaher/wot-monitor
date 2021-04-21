@@ -5,6 +5,7 @@ const { createMainWindow, getMainWindow } = require('./windows/mainWindow');
 const { createMainTray } = require('./tray/mainTray');
 const { setIpcHandlers } = require('./ipc/ipcHandlers');
 const { setAppLauncher } = require('./appLauncher');
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const isDev = require('electron-is-dev');
 
@@ -65,6 +66,10 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createMainWindow();
   }
+});
+
+app.on('ready', () => {
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 /**
