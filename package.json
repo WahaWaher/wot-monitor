@@ -1,34 +1,35 @@
 {
   "name": "wot-monitor",
-  "version": "0.1.0",
-  "description": "Desktop app for monitoring World of Tanks clan reserves",
-  "author": "WahaWaher",
-  "email": "wahawaher@gmail.com",
+  "productName": "WOT Monitor",
+  "version": "0.9.0",
+  "description": "Настольное приложение для Windows, позволяющее отслеживать активность клановых резервов в игре World of Tanks",
+  "author": {
+    "name": "WahaWaher",
+    "email": "wahawaher@gmail.com",
+    "url": "https://github.com/WahaWaher"
+  },
+  "repository": {
+    "url": "https://github.com/WahaWaher/wot-monitor"
+  },
   "homepage": "./",
   "private": true,
-  "main": "app/index.js",
-  "dependencies": {
-    "electron-is-dev": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-store": "^7.0.2"
-  },
+  "main": "/main/index.js",
   "scripts": {
-    "react-dev": "react-app-rewired start",
-    "react-build": "react-app-rewired build",
-    "react-eject": "react-app-rewired eject",
-    "electron-dev": "electron-forge start",
-    "electron-pack": "electron-forge package",
-    "electron-make": "electron-forge make",
-    "dev": "concurrently -k \"yarn react-dev\" \"wait-on tcp:3000 && yarn electron-dev\"",
-    "build": "yarn react-build && yarn electron-pack",
-    "rdev": "yarn react-dev",
-    "edev": "wait-on tcp:3000 && yarn electron-dev",
-    "epack": "yarn electron-pack"
+    "view-dev": "react-app-rewired start",
+    "view-build": "react-app-rewired build",
+    "electron-dev": "electron ./main/index.js",
+    "electron-build": "node ./scripts/build-test.js",
+    "build-release": "yarn view-build && node ./scripts/build-release.js",
+
+    "release": "node ./scripts/build-release.js"
   },
   "eslintConfig": {
     "extends": [
       "react-app"
-    ]
+    ],
+    "rules": {
+      "no-template-curly-in-string": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -38,25 +39,34 @@
       "last 1 chrome version"
     ]
   },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "dotenv": "^8.2.0",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.0.0",
+    "node-notifier": "^9.0.1",
+    "url-parse": "^1.5.1"
+  },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.54",
-    "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.5.0",
     "add": "^2.0.6",
-    "concurrently": "^6.0.0",
+    "axios": "^0.21.1",
+    "concurrently": "^6.0.2",
     "customize-cra": "^1.0.0",
-    "electron": "^12.0.2",
-    "electron-devtools-installer": "^3.1.1",
+    "date-fns": "^2.21.1",
+    "deepmerge": "^4.2.2",
+    "electron": "^12.0.4",
+    "electron-builder": "^22.10.5",
+    "electron-devtools-installer": "^3.2.0",
     "electron-reload": "^1.5.0",
+    "formik": "^2.2.6",
     "hamburger-react": "^2.4.0",
-    "node-sass": "^5.0.0",
+    "lodash-es": "^4.17.21",
+    "nanoid": "^3.1.22",
     "preval.macro": "^5.0.0",
     "prop-types": "^15.7.2",
-    "rc-input-number": "^7.0.3",
+    "rc-input-number": "^7.0.6",
     "react": "^17.0.2",
     "react-app-rewire-aliases": "^0.2.0",
     "react-app-rewire-emotion": "^4.0.0",
@@ -66,7 +76,8 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-devtools-electron": "^4.7.0",
     "react-dom": "^17.0.2",
-    "react-modal": "^3.12.1",
+    "react-modal": "^3.13.1",
+    "react-numeric-input": "^2.2.3",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -75,14 +86,14 @@
     "react-tooltip": "^4.2.17",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "5.7.2",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.2",
+    "set-interval-async": "^2.0.1",
+    "styled-components": "^5.2.3",
     "tinycolor2": "^1.4.2",
     "wait-on": "^5.3.0",
     "wdrawer": "^1.0.3",
-    "yarn": "^1.22.10"
-  },
-  "config": {
-    "forge": "./forge.config.js"
+    "yarn": "^1.22.10",
+    "yup": "^0.32.9"
   }
 }

@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "allowSyntheticDefaultImports": false,
+    "target": "es6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
+    "checkJs": true,
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["view-src/*"],
       "~/*": ["node_modules/*"]
     }
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["build", "public", "out", "node_modules/.cache"]
 }
