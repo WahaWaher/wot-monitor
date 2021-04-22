@@ -1,7 +1,7 @@
 {
   "name": "wot-monitor",
   "productName": "WOT Monitor",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "Настольное приложение для Windows, позволяющее отслеживать активность клановых резервов в игре World of Tanks",
   "author": {
     "name": "WahaWaher",

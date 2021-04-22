@@ -6,8 +6,6 @@ import PageFrame from '@/layout/parts/PageFrame';
 import List from '@/components/common/List';
 import { version, author } from './../../package.json';
 import preval from 'preval.macro';
-import Button from '@/components/common/Button';
-import { checkForUpdates } from '@/api/electronAPI';
 
 const buildDate = preval`module.exports = new Date().toLocaleString();`;
 
@@ -23,7 +21,6 @@ const About = () => (
           E-mail: <Link href={`mailto:${author.email}`}>{author.email}</Link>
         </List.Item>
       </List>
-      <Button className="mt-3" onClick={checkForUpdates}>Проверить наличие обновлений</Button>
     </Container>
   </PageFrame>
 );

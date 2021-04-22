@@ -138,16 +138,3 @@ export const setTrayTooltip = async (tooltip = '') => {
     });
   }
 };
-
-/**
- * checkForUpdates
- */
-export const checkForUpdates = async () => {
-  try {
-    return await ipcRenderer.invoke('check-for-updates');
-  } catch (e) {
-    throw genErrInfo('IPC_ERR', e, {
-      message: msgNames.IPC_CHECK_FOR_UPDATES_ERR,
-    });
-  }
-};
