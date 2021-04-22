@@ -6,7 +6,9 @@ const buildRelease = async () => {
     x64: true,
     publish: 'always',
     config: getConfig(
-      {},
+      {
+        asar: false,
+      },
       {
         os: 'win',
         arch: 'x64',
