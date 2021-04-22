@@ -9,8 +9,6 @@ autoUpdater.setFeedURL({
   token: process.env.GH_TOKEN,
 });
 
-let updater;
-
 autoUpdater.autoDownload = false;
 
 const registerUpdateListeners = () => {
@@ -22,22 +20,33 @@ const registerUpdateListeners = () => {
   });
 
   autoUpdater.on('update-available', () => {
-    dialog.showMessageBox(
-      {
+    dialog
+      .showMessageBox({
         type: 'info',
         title: 'Найдены обновления',
         message: 'Хотите запустить обновление сейчас?',
         buttons: ['Да', 'Нет'],
-      },
-      (buttonIndex) => {
-        if (buttonIndex === 0) {
-          autoUpdater.downloadUpdate();
-        } else {
-          updater.enabled = true;
-          updater = null;
+      })
+      .then(({response}) => {
+        if (response === 0) {
+          autoUpdater
+            .downloadUpdate()
+            .then((res) => {
+              dialog.showMessageBox({
+                type: 'info',
+                title: 'success',
+                message: res,
+              });
+            })
+            .catch((e) => {
+              dialog.showMessageBox({
+                type: 'info',
+                title: 'err',
+                message: e.toString(),
+              });
+            });
         }
-      }
-    );
+      });
   });
 
   autoUpdater.on('update-not-available', () => {
@@ -45,15 +54,14 @@ const registerUpdateListeners = () => {
       title: 'Обновления не найдены',
       message: 'Вы пользуетесь последней версией приложения',
     });
-    updater.enabled = true;
-    updater = null;
   });
 
   autoUpdater.on('update-downloaded', () => {
     dialog.showMessageBox(
       {
         title: 'Установка обновлений',
-        message: 'Обновления скачаны, приложение будет закрыто для установки обновлений',
+        message:
+          'Обновления скачаны, приложение будет закрыто для установки обновлений',
       },
       () => {
         setImmediate(() => autoUpdater.quitAndInstall());
@@ -70,7 +78,6 @@ const registerUpdateListeners = () => {
 };
 
 const checkForUpdates = () => {
-  updater.enabled = false;
   autoUpdater.checkForUpdates();
 };
 
