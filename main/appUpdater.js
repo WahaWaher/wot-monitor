@@ -1,6 +1,14 @@
 const { dialog, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
+autoUpdater.setFeedURL({
+  provider: 'github',
+  repo: 'wot-monitor',
+  owner: 'WahaWaher',
+  private: true,
+  token: process.env.GH_TOKEN,
+});
+
 let updater;
 
 autoUpdater.autoDownload = false;
@@ -56,7 +64,7 @@ const registerUpdateListeners = () => {
   /**
    * check-for-updates
    */
-   ipcMain.handle('check-for-updates', (e) => {
+  ipcMain.handle('check-for-updates', (e) => {
     return checkForUpdates();
   });
 };
