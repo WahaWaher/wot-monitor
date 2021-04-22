@@ -45,8 +45,12 @@ export const useMainProcessListeners = () => {
       history.push(routes[name]?.path);
     });
 
+    ipcRenderer.on('send-renderer-log', (e, ...rest) => {
+      console.log(...rest);
+    });
+
     return () =>
-      ['push-route-name'].map((channel) =>
+      ['push-route-name', 'send-renderer-log'].map((channel) =>
         ipcRenderer.removeAllListeners(channel)
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -198,7 +202,7 @@ export const useCRWidgetStarter = () => {
 };
 
 /**
- * useCRWidgetStarter
+ * useCRWidgetActivesChecker
  */
 export const useCRWidgetActivesChecker = () => {
   const { on } = useSelector(getClanReserves);

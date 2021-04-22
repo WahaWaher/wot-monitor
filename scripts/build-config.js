@@ -38,7 +38,7 @@ const getConfig = (customConfig = {}, params = {}) => {
         icon: 'main/assets/icons/favicon-reserve.ico',
         target: [
           'nsis',
-          'zip'
+          // 'zip'
         ],
       },
     },
