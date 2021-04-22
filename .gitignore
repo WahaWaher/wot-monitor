@@ -8,13 +8,13 @@
 /release
 /build
 
-# misc
+# env
 .env
 .env.development
 .env.production
 
+# misc
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
 NOTES.md
