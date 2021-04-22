@@ -16,7 +16,7 @@ autoUpdater.autoDownload = false;
 const registerUpdateListeners = () => {
   autoUpdater.on('error', (error) => {
     dialog.showErrorBox(
-      'Error: ',
+      'Ошибка: ',
       error == null ? 'unknown' : (error.stack || error).toString()
     );
   });
@@ -25,9 +25,9 @@ const registerUpdateListeners = () => {
     dialog.showMessageBox(
       {
         type: 'info',
-        title: 'Found Updates',
-        message: 'Found updates, do you want update now?',
-        buttons: ['Sure', 'No'],
+        title: 'Найдены обновления',
+        message: 'Хотите запустить обновление сейчас?',
+        buttons: ['Да', 'Нет'],
       },
       (buttonIndex) => {
         if (buttonIndex === 0) {
@@ -42,8 +42,8 @@ const registerUpdateListeners = () => {
 
   autoUpdater.on('update-not-available', () => {
     dialog.showMessageBox({
-      title: 'No Updates',
-      message: 'Current version is up-to-date.',
+      title: 'Обновления не найдены',
+      message: 'Вы пользуетесь последней версией приложения',
     });
     updater.enabled = true;
     updater = null;
@@ -52,8 +52,8 @@ const registerUpdateListeners = () => {
   autoUpdater.on('update-downloaded', () => {
     dialog.showMessageBox(
       {
-        title: 'Install Updates',
-        message: 'Updates downloaded, application will be quit for update...',
+        title: 'Установка обновлений',
+        message: 'Обновления скачаны, приложение будет закрыто для установки обновлений',
       },
       () => {
         setImmediate(() => autoUpdater.quitAndInstall());
@@ -70,6 +70,7 @@ const registerUpdateListeners = () => {
 };
 
 const checkForUpdates = () => {
+  updater.enabled = false;
   autoUpdater.checkForUpdates();
 };
 
