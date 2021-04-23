@@ -5,19 +5,26 @@ import Button from '@/components/common/Button';
 import { useStoreUpdateActions } from '@/store/hooks/useStoreActions';
 import { useHistory } from 'react-router-dom';
 import routes from '@/router/routes';
-import { useState } from 'react';
-import Title from '../common/Title';
-import TextBoxSmall from '../common/TextBoxSmall';
+import { useEffect, useState } from 'react';
+import Title from '@/components/common/Title';
+import TextBoxSmall from '@/components/common/TextBoxSmall';
 import format from 'date-fns/format';
 import { getCommonSettings } from '@/store/selectors/profileSelectors';
 
 const AppUpdaterModal = (props) => {
-  const history = useHistory();
   const { isCheckOnStart, available, info } = useSelector(getUpdate);
   const { checkUpdates } = useSelector(getCommonSettings);
   const { resetUpdateData, downloadUpdate } = useStoreUpdateActions();
-  const [isOpen, setIsOpen] = useState(isCheckOnStart && available);
+  const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
+
   const close = () => setIsOpen(false);
+
+  useEffect(() => {
+    if (isCheckOnStart && available) {
+      setIsOpen(true);
+    }
+  }, [isCheckOnStart, available]);
 
   if (!checkUpdates) return null;
 
@@ -52,12 +59,12 @@ const AppUpdaterModal = (props) => {
         </div>
       )}
     >
-      <Title size="3">Доступна новая вресия приложения!</Title>
+      <Title size="3">Доступна новая вресия!</Title>
       {info && (
         <div>
           <div>
             <TextBoxSmall className="d-inline-block">
-              Последняя версия:
+              Версия:
             </TextBoxSmall>{' '}
             {info?.version}
           </div>
