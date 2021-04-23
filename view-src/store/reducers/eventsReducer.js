@@ -2,7 +2,7 @@ import { PUSH_EVENT } from '@/store/constants/eventsConstants';
 
 const initialState = [];
 
-export function eventsReducer(state = initialState, action) {
+export const eventsReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {

@@ -5,10 +5,11 @@
   "description": "Настольное приложение для Windows, позволяющее отслеживать активность клановых резервов в игре World of Tanks",
   "author": {
     "name": "WahaWaher",
-    "email": "wahawaher@gmail.com",
+    "email": "wot.monitor.app@gmail.com",
     "url": "https://github.com/WahaWaher"
   },
   "repository": {
+    "provider": "github",
     "url": "https://github.com/WahaWaher/wot-monitor"
   },
   "homepage": "./",
@@ -19,8 +20,7 @@
     "view-build": "react-app-rewired build",
     "electron-dev": "electron ./main/index.js",
     "electron-build": "node ./scripts/build-test.js",
-    "build-release": "yarn view-build && node ./scripts/build-release.js",
-    "release": "node ./scripts/build-release.js"
+    "build-release": "yarn view-build && node ./scripts/build-release.js"
   },
   "eslintConfig": {
     "extends": [
@@ -51,14 +51,12 @@
   "devDependencies": {
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.5.0",
-    "add": "^2.0.6",
     "axios": "^0.21.1",
     "byte-size": "^7.0.1",
-    "concurrently": "^6.0.2",
     "customize-cra": "^1.0.0",
     "date-fns": "^2.21.1",
     "deepmerge": "^4.2.2",
-    "electron": "^12.0.4",
+    "electron": "^12.0.5",
     "electron-builder": "^22.10.5",
     "electron-devtools-installer": "^3.2.0",
     "electron-reload": "^1.5.0",
@@ -68,12 +66,7 @@
     "nanoid": "^3.1.22",
     "preval.macro": "^5.0.0",
     "prop-types": "^15.7.2",
-    "rc-input-number": "^7.0.6",
     "react": "^17.0.2",
-    "react-app-rewire-aliases": "^0.2.0",
-    "react-app-rewire-emotion": "^4.0.0",
-    "react-app-rewire-styled-components": "^3.0.2",
-    "react-app-rewire-unplug": "^0.9.0",
     "react-app-rewired": "^2.1.8",
     "react-custom-scrollbars": "^4.2.1",
     "react-devtools-electron": "^4.7.0",
@@ -93,9 +86,7 @@
     "set-interval-async": "^2.0.1",
     "styled-components": "^5.2.3",
     "tinycolor2": "^1.4.2",
-    "wait-on": "^5.3.0",
     "wdrawer": "^1.0.3",
-    "yarn": "^1.22.10",
     "yup": "^0.32.9"
   }
 }

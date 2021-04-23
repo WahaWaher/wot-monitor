@@ -8,32 +8,32 @@ import About from '@/pages/About';
 export const routes = {
   auth: {
     path: '/auth',
-    // access: 'has-profile',
+    access: 'public',
     component: Auth,
   },
   monitoring: {
     path: '/monitoring',
-    // access: 'authorized',
+    access: 'public',
     component: Monitoring,
   },
   notifications: {
     path: '/notifications',
-    // access: 'authorized',
+    access: 'public',
     component: Notifications,
   },
   profiles: {
     path: '/profiles',
-    // access: 'has-profile',
+    access: 'public',
     component: Profiles,
   },
   settings: {
     path: '/settings',
-    // access: 'has-profile',
+    access: 'public',
     component: Settings,
   },
   about: {
     path: '/about',
-    // access: 'public',
+    access: 'public',
     component: About,
   },
 };

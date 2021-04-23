@@ -1,11 +1,12 @@
 const AutoLaunch = require('auto-launch');
 const { getProfileSettings } = require('./stores/appStore');
+const { productName } = require('../package.json');
 
 const appLauncher = new AutoLaunch({
-  name: 'WOT Monitor',
+  name: productName,
 });
 
-appLauncher.opts.appName = 'WOT Monitor';
+appLauncher.opts.appName = productName;
 
 const setAppLauncher = async () => {
   const { openOnSystemStartUp } = getProfileSettings().common;

@@ -26,6 +26,7 @@ const AppSettings = () => {
       minimizeOnClose,
       openMinimized,
       showUnreadBadge,
+      checkUpdates,
       osNoticesOnMinimizedOnly,
     },
     widgets: { widgetClanRes },
@@ -100,6 +101,19 @@ const AppSettings = () => {
               onChange={(value) =>
                 saveSettings({
                   common: { osNoticesOnMinimizedOnly: value },
+                })
+              }
+            />
+          </Option.Value>
+        </Option>
+        <Option>
+          <Option.Text>Проверять наличие обновлений при запуске</Option.Text>
+          <Option.Value>
+            <Switch
+              checked={checkUpdates}
+              onChange={(value) =>
+                saveSettings({
+                  common: { checkUpdates: value },
                 })
               }
             />

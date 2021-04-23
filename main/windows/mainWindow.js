@@ -1,4 +1,5 @@
 const path = require('path');
+const open = require('open');
 const isDev = require('electron-is-dev');
 const { BrowserWindow } = require('electron');
 const {
@@ -30,6 +31,13 @@ const createMainWindow = () => {
       webSecurity: false,
     },
     ...getLastWindowBounds(),
+  });
+
+  mainWindow.webContents.on('will-navigate', (e, url) => {
+    if (url !== mainWindow.webContents.getURL()) {
+      e.preventDefault();
+      open(url);
+    }
   });
 
   mainWindow.once('ready-to-show', () => {

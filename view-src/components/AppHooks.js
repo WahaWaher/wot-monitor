@@ -6,10 +6,12 @@ import {
   useCRWidgetStatusSetter,
   useTrayInfo,
   useMainProcessListeners,
+  useAppUpdater,
 } from '@/hooks';
 
 const AppHooks = () => {
   useMainProcessListeners();
+  useAppUpdater();
   useAuthChecker();
   useCRWidgetStarter();
   useCRWidgetActivesChecker();

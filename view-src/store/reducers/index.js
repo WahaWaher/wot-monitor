@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist';
 import { electronStorage } from '@/store/electronStorage';
 import { profileReducer } from '@/store/reducers/profileReducer';
 import { eventsReducer } from '@/store/reducers/eventsReducer';
+import { updateReducer } from '@/store/reducers/updateReducer';
 
 const config = {
   profile: {
@@ -16,4 +17,5 @@ const config = {
 export const rootReducer = combineReducers({
   profile: persistReducer(config.profile, profileReducer),
   events: eventsReducer,
+  update: updateReducer,
 });

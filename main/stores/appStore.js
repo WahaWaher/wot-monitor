@@ -1,4 +1,7 @@
+const { app } = require('electron');
+const path = require('path');
 const Store = require('electron-store');
+const isDev = require('electron-is-dev');
 
 let appStore;
 
@@ -8,6 +11,7 @@ let appStore;
 const createAppStore = () => {
   appStore = new Store({
     name: 'app-store',
+    cwd: isDev ? path.resolve(process.cwd(), 'temp') : app.getPath('userData'),
     defaults: {
       profiles: {
         1: {
@@ -72,15 +76,16 @@ const createAppStore = () => {
               minimizeOnClose: false,
               showUnreadBadge: true,
               osNoticesOnMinimizedOnly: false,
+              checkUpdates: true,
               noticesTypeFilter: [],
             },
             widgets: {
               widgetClanRes: {
                 startOnOpen: false,
-                updateInterval: 5,
+                updateInterval: 45,
                 sendNotices: true,
                 sendOSNotices: true,
-                osNoticesTypes: [],
+                osNoticesTypes: ['stop', 'reserve'],
               },
             },
           },
@@ -95,8 +100,6 @@ const createAppStore = () => {
 
   return appStore;
 };
-
-
 
 /**
  * getAppStore

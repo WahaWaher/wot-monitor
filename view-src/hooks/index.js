@@ -7,7 +7,10 @@ import {
   getWCRSettings,
 } from '@/store/selectors/profileSelectors';
 import { getNowTimeStamp } from '@/utils/dates';
-import { useStoreProfileActions } from '@/store/hooks/useStoreActions';
+import {
+  useStoreProfileActions,
+  useStoreUpdateActions,
+} from '@/store/hooks/useStoreActions';
 import { formatReserveTimeLeft } from '@/utils/dates';
 import { REACT_APP_AUTH_CHECK_TIIMEOUT } from '@/config';
 import {
@@ -27,11 +30,7 @@ import { trayTooltipNames } from '@/messages/data';
 import { ipcRenderer } from '@/api/electronAPI';
 import { useHistory } from 'react-router';
 import { routes } from '@/router/routes';
-import {
-  checkForUpdates,
-  downloadUpdate,
-  installUpdate,
-} from '@/api/electronAPI';
+import { getCommonSettings } from '@/store/selectors/profileSelectors';
 
 const changeTrayIconDebounced = debounce((actionCreator, args) => {
   actionCreator(args);
@@ -39,41 +38,41 @@ const changeTrayIconDebounced = debounce((actionCreator, args) => {
 
 export const useTheme = () => useContext(ThemeContext);
 
-const initialUpdateState = {
-  error: null,
-  info: null,
-  available: null,
-  downloaded: null,
-  progress: null,
-  loading: false,
-};
-
 /**
- * useAppUpdate
+ * useAppUpdater
  */
-export const useAppUpdate = () => {
-  const [update, setUpdate] = useState(initialUpdateState);
+export const useAppUpdater = () => {
+  const { setUpdate, checkForUpdates } = useStoreUpdateActions();
+  const { checkUpdates } = useSelector(getCommonSettings);
 
   useEffect(() => {
     ipcRenderer.on('update-error', (e, errData) => {
-      console.log('update-error', errData);
-      setUpdate((state) => ({ ...state, error: errData, loading: false }));
+      setUpdate({ error: errData, loading: false });
     });
     ipcRenderer.on('update-available', (e, info) => {
-      console.log('update-available', info);
-      setUpdate((state) => ({ ...state, available: true, loading: false, info }));
+      setUpdate({
+        available: true,
+        loading: false,
+        info,
+      });
     });
     ipcRenderer.on('update-not-available', (e, info) => {
-      console.log('update-not-available', info);
-      setUpdate((state) => ({ ...state, available: false, loading: false, info }));
+      setUpdate({
+        available: false,
+        loading: false,
+        info,
+      });
     });
     ipcRenderer.on('update-downloaded', (e, info) => {
-      console.log('update-downloaded', info);
-      setUpdate((state) => ({ ...state, downloaded: true, progress: null, loading: false, info }));
+      setUpdate({
+        downloaded: true,
+        progress: null,
+        loading: false,
+        info,
+      });
     });
     ipcRenderer.on('update-download-progress', (e, progress) => {
-      console.log('update-downloaded', progress);
-      setUpdate((state) => ({ ...state, progress }));
+      setUpdate({ progress });
     });
 
     return () =>
@@ -87,20 +86,16 @@ export const useAppUpdate = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return {
-    update,
-    checkForUpdates: async () => {
-      setUpdate({ ...initialUpdateState, loading: true });
+  useEffect(() => {
+    if (checkUpdates) {
+      (async () => {
+        await checkForUpdates();
 
-      return await checkForUpdates();
-    },
-    downloadUpdate: async () => {
-      setUpdate((state) => ({ ...state, loading: true }));
-
-      return await downloadUpdate();
-    },
-    installUpdate,
-  };
+        setUpdate({ isCheckOnStart: true });
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };
 
 /**

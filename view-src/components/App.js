@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 import AppHeader from '@/layout/parts/AppHeader';
 import AppDrawer from '@/layout/parts/AppDrawer';
 import AppContentArea from '@/layout/parts/AppContentArea';
-import AppHooks from './AppHooks';
+import AppHooks from '@/components/AppHooks';
+import AppUpdaterModal from '@/components/special/AppUpdaterModal';
 
 const App = () => (
   <Root>
@@ -13,6 +14,7 @@ const App = () => (
       <AppRoutes />
       <AppDrawer />
     </AppContentArea>
+    <AppUpdaterModal />
   </Root>
 );
 

@@ -84,21 +84,22 @@ export const initialState = {
       minimizeOnClose: false,
       showUnreadBadge: false,
       osNoticesOnMinimizedOnly: false,
+      checkUpdates: true,
       noticesTypeFilter: [],
     },
     widgets: {
       widgetClanRes: {
         startOnOpen: false,
-        updateInterval: 60,
+        updateInterval: 45,
         sendNotices: true,
         sendOSNotices: true,
-        osNoticesTypes: [],
+        osNoticesTypes: ['stop', 'reserve'],
       },
     },
   },
 };
 
-export function profileReducer(state = initialState, action) {
+export const profileReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -306,4 +307,4 @@ export function profileReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};

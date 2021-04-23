@@ -1,10 +1,15 @@
 const { ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const { getMainWindow } = require('./windows/mainWindow');
-const { name, author, private: isPrivate } = require('../package.json');
+const {
+  name,
+  author,
+  repository,
+  private: isPrivate,
+} = require('../package.json');
 
 autoUpdater.setFeedURL({
-  provider: 'github',
+  provider: repository.provider,
   repo: name,
   owner: author.name,
   private: isPrivate,
@@ -13,7 +18,7 @@ autoUpdater.setFeedURL({
 
 autoUpdater.autoDownload = false;
 
-const registerAppUpdaterListeners = () => {
+const setAppUpdaterListeners = () => {
   const mainWindow = getMainWindow();
 
   autoUpdater.on('error', ({ name, message, stack } = {}) => {
@@ -67,4 +72,4 @@ const registerAppUpdaterListeners = () => {
   });
 };
 
-module.exports = { registerAppUpdaterListeners };
+module.exports = { setAppUpdaterListeners };
