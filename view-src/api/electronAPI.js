@@ -144,10 +144,36 @@ export const setTrayTooltip = async (tooltip = '') => {
  */
 export const checkForUpdates = async () => {
   try {
-    return await ipcRenderer.invoke('check-for-updates');
+    return await ipcRenderer.invoke('update-check-for-updates');
   } catch (e) {
     throw genErrInfo('IPC_ERR', e, {
       message: msgNames.IPC_CHECK_FOR_UPDATES_ERR,
+    });
+  }
+};
+
+/**
+ * downloadUpdate
+ */
+export const downloadUpdate = async () => {
+  try {
+    return await ipcRenderer.invoke('update-download');
+  } catch (e) {
+    throw genErrInfo('IPC_ERR', e, {
+      message: msgNames.IPC_DOWNLOAD_UPDATE_ERR,
+    });
+  }
+};
+
+/**
+ * installUpdate
+ */
+ export const installUpdate = async () => {
+  try {
+    return await ipcRenderer.invoke('update-quit-and-install');
+  } catch (e) {
+    throw genErrInfo('IPC_ERR', e, {
+      message: msgNames.IPC_INSTALL_UPDATE_ERR,
     });
   }
 };

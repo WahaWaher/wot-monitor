@@ -64,7 +64,7 @@ const Alert = (props) => <Root {...props} />;
 const Root = styled.div`
   ${({ type, shape, center, dense, theme: { palette, utils } }) => css`
     cursor: default;
-    font-size: ${dense ? '0.8rem' : '0.9rem'};
+    font-size: ${dense ? '0.85rem' : '0.9rem'};
     text-align: ${center && 'center'};
     color: ${palette.text.main};
     background-color: ${utils.toRgba(palette.background.light, 0.35)};

@@ -5,15 +5,10 @@ const { createMainWindow, getMainWindow } = require('./windows/mainWindow');
 const { createMainTray } = require('./tray/mainTray');
 const { setIpcHandlers } = require('./ipc/ipcHandlers');
 const { setAppLauncher } = require('./appLauncher');
-const { registerUpdateListeners } = require('./appUpdater');
+const { registerAppUpdaterListeners } = require('./appUpdater');
 const path = require('path');
+const open = require('open');
 const isDev = require('electron-is-dev');
-
-const log = require('electron-log');
-const { autoUpdater } = require('electron-updater');
-
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -39,7 +34,7 @@ if (!gotTheLock) {
 
     setIpcHandlers({ appStore, mainWindow, mainTray });
     setAppLauncher();
-    registerUpdateListeners();
+    registerAppUpdaterListeners();
 
     if (isDev) {
       const {
@@ -75,36 +70,21 @@ app.on('activate', () => {
   }
 });
 
-// autoUpdater.on('checking-for-update', () => {
-//   console.log('Checking for update...');
-// });
-// autoUpdater.on('update-available', (info) => {
-//   console.log('Update available.', info);
-// });
-// autoUpdater.on('update-not-available', (info) => {
-//   console.log('Update not available.', info);
-// });
-// autoUpdater.on('error', (err) => {
-//   console.log('Error in auto-updater. ', err);
-// });
-// autoUpdater.on('download-progress', (progressObj) => {
-//   let log_message = 'Download speed: ' + progressObj.bytesPerSecond;
-
-//   log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-//   log_message =
-//     log_message +
-//     ' (' +
-//     progressObj.transferred +
-//     '/' +
-//     progressObj.total +
-//     ')';
-
-//   console.log('download-progress', log_message);
-// });
-// autoUpdater.on('update-downloaded', (info) => {
-//   console.log('Update downloaded', info);
-//   // autoUpdater.quitAndInstall();
-// });
+/**
+ * Open external link in OS default browser
+ */
+app.on('web-contents-created', (e, contents) => {
+  contents.on('new-window', (e, url) => {
+    e.preventDefault();
+    open(url);
+  });
+  contents.on('will-navigate', (e, url) => {
+    if (url !== contents.getURL()) {
+      e.preventDefault();
+      open(url);
+    }
+  });
+});
 
 /**
  * Hot reloading

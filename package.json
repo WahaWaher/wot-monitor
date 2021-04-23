@@ -1,7 +1,7 @@
 {
   "name": "wot-monitor",
   "productName": "WOT Monitor",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "Настольное приложение для Windows, позволяющее отслеживать активность клановых резервов в игре World of Tanks",
   "author": {
     "name": "WahaWaher",
@@ -42,10 +42,10 @@
     "auto-launch": "^5.0.5",
     "dotenv": "^8.2.0",
     "electron-is-dev": "^2.0.0",
-    "electron-log": "^4.3.4",
     "electron-store": "^8.0.0",
     "electron-updater": "^4.3.8",
     "node-notifier": "^9.0.1",
+    "open": "^8.0.6",
     "url-parse": "^1.5.1"
   },
   "devDependencies": {
@@ -53,6 +53,7 @@
     "@mdi/react": "^1.5.0",
     "add": "^2.0.6",
     "axios": "^0.21.1",
+    "byte-size": "^7.0.1",
     "concurrently": "^6.0.2",
     "customize-cra": "^1.0.0",
     "date-fns": "^2.21.1",

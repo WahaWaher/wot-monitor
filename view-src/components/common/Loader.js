@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Loader = (props) => {
   return (
-    <Root>
+    <Root {...props}>
       <div></div>
       <div></div>
       <div></div>

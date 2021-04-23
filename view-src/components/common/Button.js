@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const Button = (props) => <Root {...props} />;
 
 const Root = styled.button`
-  ${({ wide, theme: { palette, transitions, utils } }) => css`
-    cursor: pointer;
+  ${({ wide, disabled, theme: { palette, transitions, utils } }) => css`
+    cursor: ${disabled ? 'default' : 'pointer'};
     width: ${wide && '100%'};
     min-height: 29px;
     color: ${palette.text.main};
@@ -13,6 +13,8 @@ const Root = styled.button`
     background-color: transparent;
     padding: 0.3rem 1em;
     transition: all ${transitions.duration.main}s;
+    pointer-events: ${disabled && 'none'};
+    opacity: ${disabled && '.5'};
     &:hover,
     &:focus {
       background-color: ${utils.toRgba(palette.background.light, 0.25)};
@@ -25,10 +27,12 @@ const Root = styled.button`
 
 Button.propTypes = {
   wide: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
   wide: false,
+  disabled: false,
 };
 
 export default Button;

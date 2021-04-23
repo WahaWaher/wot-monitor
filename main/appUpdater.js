@@ -1,84 +1,70 @@
-const { dialog, ipcMain } = require('electron');
+const { ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const { getMainWindow } = require('./windows/mainWindow');
+const { name, author, private: isPrivate } = require('../package.json');
 
 autoUpdater.setFeedURL({
   provider: 'github',
-  repo: 'wot-monitor',
-  owner: 'WahaWaher',
-  private: true,
+  repo: name,
+  owner: author.name,
+  private: isPrivate,
   token: process.env.GH_TOKEN,
 });
 
 autoUpdater.autoDownload = false;
 
-const registerUpdateListeners = () => {
-  autoUpdater.on('error', (error) => {
-    dialog.showErrorBox(
-      'Ошибка: ',
-      error == null ? 'unknown' : (error.stack || error).toString()
-    );
+const registerAppUpdaterListeners = () => {
+  const mainWindow = getMainWindow();
+
+  autoUpdater.on('error', ({ name, message, stack } = {}) => {
+    mainWindow.webContents.send('update-error', { name, message, stack });
   });
 
-  autoUpdater.on('update-available', () => {
-    dialog
-      .showMessageBox({
-        type: 'info',
-        title: 'Найдены обновления',
-        message: 'Хотите запустить обновление сейчас?',
-        buttons: ['Да', 'Нет'],
-      })
-      .then(({response}) => {
-        if (response === 0) {
-          autoUpdater
-            .downloadUpdate()
-            .then((res) => {
-              dialog.showMessageBox({
-                type: 'info',
-                title: 'success',
-                message: res,
-              });
-            })
-            .catch((e) => {
-              dialog.showMessageBox({
-                type: 'info',
-                title: 'err',
-                message: e.toString(),
-              });
-            });
-        }
-      });
-  });
+  autoUpdater.on('update-available', (info) => {
+    const { version, path, releaseDate } = info;
 
-  autoUpdater.on('update-not-available', () => {
-    dialog.showMessageBox({
-      title: 'Обновления не найдены',
-      message: 'Вы пользуетесь последней версией приложения',
+    mainWindow.webContents.send('update-available', {
+      version,
+      path,
+      releaseDate,
     });
   });
 
-  autoUpdater.on('update-downloaded', () => {
-    dialog.showMessageBox(
-      {
-        title: 'Установка обновлений',
-        message:
-          'Обновления скачаны, приложение будет закрыто для установки обновлений',
-      },
-      () => {
-        setImmediate(() => autoUpdater.quitAndInstall());
-      }
-    );
+  autoUpdater.on('update-not-available', (info) => {
+    const { version, path, releaseDate } = info;
+
+    mainWindow.webContents.send('update-not-available', {
+      version,
+      path,
+      releaseDate,
+    });
   });
 
-  /**
-   * check-for-updates
-   */
-  ipcMain.handle('check-for-updates', (e) => {
-    return checkForUpdates();
+  autoUpdater.on('update-downloaded', (info) => {
+    const { version, path, releaseDate } = info;
+
+    mainWindow.webContents.send('update-downloaded', {
+      version,
+      path,
+      releaseDate,
+    });
+  });
+
+  autoUpdater.on('download-progress', (progress) => {
+    return mainWindow.webContents.send('update-download-progress', progress);
+  });
+
+  ipcMain.handle('update-check-for-updates', () => {
+    return autoUpdater.checkForUpdates();
+  });
+
+  ipcMain.handle('update-download', () => {
+    return autoUpdater.downloadUpdate();
+  });
+
+  ipcMain.handle('update-quit-and-install', () => {
+    return autoUpdater.quitAndInstall();
   });
 };
 
-const checkForUpdates = () => {
-  autoUpdater.checkForUpdates();
-};
-
-module.exports = { registerUpdateListeners, checkForUpdates };
+module.exports = { registerAppUpdaterListeners };

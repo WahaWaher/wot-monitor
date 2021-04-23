@@ -31,8 +31,8 @@ const IconContainer = styled.span`
   ${({ theme: { palette } }) => css`
     display: inline-block;
     vertical-align: middle;
-    width: 1em;
-    height: 1em;
+    width: 1.088em;
+    height: 1.088em;
     margin-left: 0.15em;
   `}
 `;

@@ -4,6 +4,9 @@ import App from '@/components/App';
 import { AppStore } from '@/store';
 import { AppRouter } from '@/router';
 import { AppTheme } from '@/theme';
+import { openExternalLinksInOsBrowser } from './utils';
+
+openExternalLinksInOsBrowser();
 
 ReactDOM.render(
   <React.StrictMode>
