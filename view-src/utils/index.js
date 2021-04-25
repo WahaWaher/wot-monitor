@@ -130,17 +130,3 @@ export const filterErrForWidgetStatus = (err) => {
  */
 export const timeout = (ms) =>
   new Promise((resolve) => setTimeout(resolve, ms));
-
-/**
- * Open external links in OS browser
- */
-export const openExternalLinksInOsBrowser = () => {
-  // const { shell } = window.require('electron');
-
-  // document.addEventListener('click', function (event) {
-  //   if (event.target.tagName === 'A' && event.target.href.startsWith('http')) {
-  //     event.preventDefault();
-  //     shell.openExternal(event.target.href);
-  //   }
-  // });
-};
