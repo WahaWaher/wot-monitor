@@ -2,9 +2,9 @@
   <img src="https://user-images.githubusercontent.com/24222149/115955361-ab72ad80-a4fe-11eb-9f3e-9488e8808dd9.png" height="130">
   <h1 align="center">WOT Monitor</h1>
   <p align="center">
-    <a href="https://github.com/WahaWaher/wot-monitor/releases">
+<!-- <a href="https://github.com/WahaWaher/wot-monitor/releases">
 	<img src="https://img.shields.io/github/package-json/v/WahaWaher/wot-monitor?label=%D0%92%D0%B5%D1%80%D1%81%D0%B8%D1%8F&style=flat-square" alt="asd">
-    </a>
+    </a> -->
   </p>
   <p align="center">Настольное приложение для Windows, позволяющее мониторить <br> активность клановых резервов в игре «World of Tanks»<p>
 </p>
