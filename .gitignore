@@ -2,9 +2,11 @@
 
 # dependencies
 /node_modules
+/ui/node_modules
 
 # production
-/view
+/main/build
+/ui/build
 /release
 /build
 /temp

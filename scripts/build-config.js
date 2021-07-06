@@ -15,14 +15,23 @@ const getConfig = (customConfig = {}, params = {}) => {
         output: 'release',
       },
       files: [
-        'main/**/*',
-        'view/**/*',
+        {
+          "from": "main/build",
+          "to": "src/main",
+          "filter": ["**/*"]
+        },
+        {
+          "from": "ui/build",
+          "to": "src/ui",
+          "filter": ["**/*"]
+        },
         '.env',
         '.env.production',
+        'package.json',
         'node_modules/**/*',
       ],
       extraMetadata: {
-        main: 'main/index.js',
+        main: 'src/main/index.js',
       },
       nsis: {
         oneClick: false,
@@ -35,7 +44,7 @@ const getConfig = (customConfig = {}, params = {}) => {
         artifactName: `${name}-${version}-setup-${os}-${arch}.\${ext}`,
       },
       win: {
-        icon: 'main/assets/icons/favicon-reserve.ico',
+        icon: '../assets/icons/favicon-reserve.ico',
         target: [
           'nsis',
           'zip'
