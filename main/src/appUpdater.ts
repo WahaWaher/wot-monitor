@@ -1,13 +1,12 @@
 import { ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import { getMainWindow } from '@/windows/mainWindow';
-import { pkg } from '@/utils/pkgUtils';
 
 autoUpdater.setFeedURL({
   provider: 'github',
-  repo: pkg?.name,
-  owner: pkg?.author?.name,
-  private: pkg?.private,
+  repo: 'wot-monitor',
+  owner: 'WahaWaher',
+  private: true,
   token: process.env.GH_TOKEN,
 });
 
