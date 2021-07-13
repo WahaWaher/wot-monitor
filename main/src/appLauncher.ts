@@ -1,13 +1,15 @@
-import AutoLaunch from 'auto-launch';
 import { getProfileSettings } from '@/stores/appStore';
-import { pkg } from '@/utils/pkgUtils';
+import AutoLaunch from 'auto-launch';
+import isDev from 'electron-is-dev';
+
+const getLaunchAppName = () => `WOT Monitor${isDev ? ' (dev)': ''}`;
 
 const appLauncher = new AutoLaunch({
-  name: pkg?.productName || '',
+  name: getLaunchAppName(),
 });
 
 /* @ts-ignore */
-appLauncher.opts.appName = pkg?.productName;
+appLauncher.opts.appName = getLaunchAppName();
 
 const setAppLauncher = async () => {
   const { openOnSystemStartUp } = getProfileSettings().common;
@@ -23,3 +25,4 @@ const setAppLauncher = async () => {
 };
 
 export { appLauncher, setAppLauncher };
+

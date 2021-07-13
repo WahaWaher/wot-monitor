@@ -251,7 +251,7 @@ const AppNotifications = () => {
         )}
         {!allNoticesCount && (
           <Alert shape="compact" center>
-            Сообщения не найдено
+            Сообщения не найдены
           </Alert>
         )}
         {allNoticesCount > 0 && !filteredNoticesCount && (
