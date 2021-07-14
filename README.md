@@ -24,7 +24,7 @@
 
 <br>
 
-**Скачать:** [WOT Monitor для Windows x64 (Installer)](https://github.com/WahaWaher/wot-monitor/releases/download/v1.1.3/wot-monitor-1.1.3-setup-win-x64.exe) / [Другие сборки](https://github.com/WahaWaher/wot-monitor/releases/)
+**Скачать:** [WOT Monitor для Windows x64 (Installer)](https://github.com/WahaWaher/wot-monitor/releases/download/v1.1.5/wot-monitor-1.1.5-setup-win-x64.exe) / [Другие сборки](https://github.com/WahaWaher/wot-monitor/releases/)
 
 <br><br>
 
